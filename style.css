@@ -1,0 +1,488 @@
+body {
+  background: linear-gradient(to top, lightyellow, white);
+  font-family: "Tilt Neon", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "XROT" 0, "YROT" 0;
+  overflow-x: hidden; /* Mencegah pengguliran horizontal */
+}
+
+.input-form {
+  margin: 20px;
+}
+
+.container {
+  margin-top: 130px;
+}
+
+.form-control {
+  display: flex;
+  margin-left: 130px;
+  margin-top: -20px;
+  border-radius: 20px;
+  width: 77%;
+  height: 30px;
+  border: 1px dashed black;
+  padding-left: 10px;
+}
+
+.form-file {
+  margin-left: 100px;
+  border-radius: 10px;
+}
+
+.btn-plus {
+  width: 100%;
+  height: 40px;
+  background-color: lightyellow;
+  color: black;
+  border: 1px solid black;
+  border-radius: 50px;
+  margin-top: 30px;
+}
+
+.btn-plus:hover {
+  background-color: black;
+  color: lightyellow;
+}
+
+.navbar {
+  width: 100%;
+  display: flex;
+  height: 85px;
+  background-color: black;
+  margin-bottom: 50px;
+  border-radius: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.logo {
+  height: 85px;
+}
+
+.logo:hover {
+  transition: 1000ms;
+  transform: rotate(180deg);
+  cursor: pointer;
+}
+
+.nav-item ul {
+  list-style-type: none;
+  padding: 0;
+  margin-left: 50px;
+  margin-top: 23px;
+}
+
+.nav-item ul li {
+  display: inline-block; /* Membuat tautan sejajar secara horizontal */
+  margin-right: 10px; /* Jarak antara tautan */
+}
+
+.nav-item ul li a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: lightyellow;
+  border-radius: 10px;
+}
+
+.nav-item ul li a:hover {
+  background-color: lightyellow;
+  color: black;
+}
+
+.nav-item ul li a.active {
+  background-color: lightyellow;
+  color: black;
+}
+
+.img-icon {
+  display: flex;
+  width: 100%;
+  padding: 50px;
+  margin-top: -20px;
+  gap: 110px;
+}
+
+.img-icon img {
+  width: 300px;
+  border-radius: 20px;
+  margin-left: 110px;
+}
+
+.search-con {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-btn-auth {
+  display: flex;
+  margin-left: auto;
+  margin-top: 30px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.btn-auth {
+  text-decoration: none;
+  color: lightyellow;
+  margin-right: 20px;
+  height: 20px;
+  padding: 5px;
+}
+
+.btn-auth:hover {
+  background-color: lightyellow;
+  color: black;
+  border-radius: 10px;
+}
+
+.search-input {
+  width: 250px;
+  height: 50px;
+  border: 2px dashed black;
+  border-radius: 15px;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.search-input:hover {
+  cursor: pointer;
+}
+
+.btn-meme {
+  width: 100px;
+  height: 50px;
+  background-color: white;
+  border: 2px dashed black;
+  border-radius: 15px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.btn-meme:hover {
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.title-desc-con {
+  margin-top: 80px;
+}
+
+.title-desc-con h2 {
+  opacity: 0; /* Mulai dengan keadaan tidak terlihat */
+  transform: translateY(20px); /* Pindahkan ke bawah 20px */
+  transition: opacity 1s, transform 1s; /* Terapkan durasi transisi 1 detik */
+}
+
+.title-desc-con h2.active {
+  opacity: 1; /* Ubah opacity menjadi 1 saat kelas "active" ditambahkan */
+  transform: translateY(0); /* Kembalikan ke posisi awal */
+}
+
+.post {
+  width: 100%;
+  display: flex;
+  gap: 50px;
+  text-align: center;
+  justify-content: space-between;
+}
+
+.any-post {
+  width: 100%;
+  margin-top: 30px;
+  padding: 20px;
+  background-color: white;
+  border: 2px dashed black;
+  border-radius: 20px;
+  text-decoration: none;
+  color: black;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 1s, transform 1s;
+}
+
+.any-post.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.any-post:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.post-logo {
+  border-radius: 10px;
+  height: 85px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.separator {
+  display: flex;
+  margin-top: 50px;
+}
+
+/* .separator:hover {
+  transition: 1000ms;
+  transform: rotate(180deg);
+  cursor: pointer;
+} */
+
+.sep-logo {
+  border-radius: 5px;
+  height: 20px;
+}
+
+.left-sep {
+  display: flex;
+  gap: 5px;
+}
+
+.right-sep {
+  display: flex;
+  margin-left: auto;
+  gap: 5px;
+}
+
+.card {
+  width: 100%;
+  display: flex;
+  margin-top: 50px;
+  background-color: black;
+  color: lightyellow;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.desc-logo {
+  padding: 30px;
+  margin-top: 10px;
+  height: 200px;
+  border-radius: 50px;
+}
+
+.desc-logo:hover {
+  cursor: pointer;
+  transform: scaleUp(10);
+  transition: 1000ms;
+}
+
+.con-txt {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  text-align: justify;
+}
+
+.con-txt h2 {
+  color: #ffffff;
+}
+
+.underline-desc {
+  height: 20px;
+  border-radius: 20px;
+  background-color: lightyellow;
+  margin-top: 100px;
+}
+
+.underline-list {
+  width: 100%;
+  height: 20px;
+  border-radius: 20px;
+  background-color: lightyellow;
+  margin-left: -30px;
+  margin-bottom: 20px;
+}
+
+.sub-list-meme {
+  width: 100%;
+  display: flex;
+  margin: -30px;
+  margin-bottom: 20px;
+  margin-top: -10px;
+}
+
+.col-list-img {
+  width: 100%;
+  background-color: lightyellow;
+  display: flex;
+  border-radius: 20px;
+  margin-top: 30px;
+}
+
+.col-list-img img {
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.list-txt {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin-left: 50px;
+}
+
+.list-txt h2 {
+  margin-left: -30px;
+}
+
+.head-collect {
+  display: flex;
+}
+
+.btn-add-collect {
+  margin-left: auto;
+  width: 50px;
+  height: auto;
+  background-color: black;
+  border: 2px dashed lightyellow;
+  color: lightyellow;
+  border-radius: 10px;
+  margin-right: 30px;
+  margin-top: 10px;
+  font-size: 30px;
+  text-decoration: none;
+  padding-left: 30px;
+}
+
+.btn-add-collect:hover {
+  background-color: lightyellow;
+  border: noen;
+  color: black;
+}
+.footer {
+  display: flex;
+  background-color: black;
+  color: lightyellow;
+  margin-top: 50px;
+  padding: 20px;
+  gap: 100px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.footer-txt-con {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer-txt-con a {
+  text-decoration: none;
+  color: lightyellow;
+}
+.footer-txt-con a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.review-con {
+  width: 100%;
+  margin-top: 50px;
+  font-size: 20px;
+  display: flex;
+  gap: 50px;
+  padding: 20px;
+}
+
+.review-con p {
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  margin-left: 5px;
+  background-color: black;
+  color: lightyellow;
+  transition: 1000ms;
+  transform: scaleUp(10);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.rev-card {
+  display: flex;
+  width: 600px;
+  background-color: black;
+  color: lightyellow;
+  border-radius: 20px;
+  font-size: 12px;
+  padding: 10px;
+  gap: 20px;
+  text-align: left;
+  scroll-snap-align: end;
+}
+
+.rev-card h3 {
+  width: 200px;
+  margin-top: 8px;
+}
+
+.rev-scroll {
+  /* Atur tata letak elemen .rev-scroll */
+  height: 130px;
+  width: 86%;
+  display: flex;
+  overflow-x: auto; /* Membuat scroll horizontal */
+  scroll-snap-type: x mandatory; /* Membuat setiap kartu geser secara penuh saat digulir */
+  gap: 30px; /* Jarak antara kartu */
+  margin-left: -20px;
+}
+
+.sosmed-flex {
+  display: flex;
+  border: 2px dashed lightyellow;
+  margin-top: 100px;
+  border-radius: 20px;
+  gap: 10px;
+  padding: 10px;
+}
+
+.sosmed-flex img {
+  width: 30px;
+  height: auto;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 120px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  right: 46px; /* Atur jarak dari sisi kanan */
+  margin-top: 35px;
+  border-radius: 20px;
+}
+
+/* Style untuk tombol profil */
+.btn-auth-profil {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-right: 80px; /* Atur jarak dari sisi kanan */
+  float: right;
+}
+
+/* Style untuk tautan dalam dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Style untuk tautan dalam dropdown saat dihover */
+.dropdown-content a:hover {
+  background-color: lightyellow;
+  border-radius: 20px;
+}
