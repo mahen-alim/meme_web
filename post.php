@@ -154,6 +154,10 @@ if (!isset($_SESSION['email'])) {
             transition: opacity 2s ease-in-out;
         }
 
+        .newText:hover {
+            cursor: pointer;
+        }
+
         #arrowImg:hover {
             cursor: pointer;
         }
@@ -168,7 +172,7 @@ if (!isset($_SESSION['email'])) {
     <div class="container">
         <nav class="navbar">
             <div class="img-con">
-                <img class="logo" src="img/logo_meme.png" alt="">
+                <img class="logo" src="img/meme-c2.png" alt="">
             </div>
             <div class="nav-item">
                 <ul>

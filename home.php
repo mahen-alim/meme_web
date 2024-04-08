@@ -19,7 +19,7 @@ session_start();
     <div class="container">
         <nav class="navbar">
             <div class="img-con">
-                <img class="logo" src="img/logo_meme.png" alt="">
+                <img class="logo" src="img/meme-c2.png" alt="">
             </div>
             <div class="nav-item">
                 <ul>
