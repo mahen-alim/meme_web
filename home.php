@@ -33,7 +33,7 @@ session_start();
                     <?php
                     }
                     ?>
-                    <li><a href="#">Tentang Kami</a></li>
+                    <li><a href="about_me.php">Tentang Kami</a></li>
                 </ul>
 
             </div>

@@ -178,7 +178,7 @@ if (!isset($_SESSION['email'])) {
                 <ul>
                     <li><a href="home.php">Home</a></li>
                     <li><a href="post.php" class="active">Post</a></li>
-                    <li><a href="#">Tentang Kami</a></li>
+                    <li><a href="about_me.php">Tentang Kami</a></li>
                 </ul>
             </div>
             <div class="nav-btn-auth">
