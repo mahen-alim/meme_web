@@ -1,30 +1,52 @@
 <?php
 
-require_once 'koneksi.php';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Sambungkan ke database
+    require_once 'koneksi.php'; // Sesuaikan dengan file koneksi Anda
 
-if (isset($_POST['nama'], $_POST['usia'], $_POST['jenis_kelamin'], $_POST['pekerjaan'], $_POST['file'])) {
+    // Ambil data yang dikirimkan melalui form
     $nama = $_POST['nama'];
-    $usia = $_POST['usia'];
     $jenis_kelamin = $_POST['jenis_kelamin'];
-    $pekerjaan = $_POST['pekerjaan'];
-    $file = $_POST['file'];
+    $deskripsi = $_POST['deskripsi'];
 
-    // Persiapkan kueri insert menggunakan parameter
-    $stmt = $connection->prepare("INSERT INTO profile (nama, usia, jenis_kelamin, pekerjaan, file) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $nama, $usia, $jenis_kelamin, $pekerjaan, $file);
+    // Cek apakah file sudah diunggah dengan benar
+    if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
+        // Simpan informasi file yang diunggah
+        $file_name = $_FILES['file']['name'];
+        $file_tmp = $_FILES['file']['tmp_name'];
 
-    // Eksekusi kueri
-    if ($stmt->execute()) {
-        echo json_encode(array("message" => "Data inserted successfully"));
+        // Pindahkan file yang diunggah ke direktori yang diinginkan
+        $upload_path = 'uploads/' . $file_name; // Sesuaikan dengan direktori penyimpanan Anda
+        move_uploaded_file($file_tmp, $upload_path);
     } else {
-        echo json_encode(array("message" => "Failed to insert data"));
+        // Jika file tidak diunggah, berikan nama default atau lakukan tindakan lainnya
+        $file_name = 'default.jpg';
     }
+
+    // Siapkan query SQL untuk memasukkan data ke tabel post
+    $query = "INSERT INTO post (nama, jenis_kelamin, deskripsi, foto) VALUES (?, ?, ?, ?)";
+
+    // Siapkan statement
+    $stmt = $connection->prepare($query);
+
+    // Bind parameter ke statement
+    $stmt->bind_param("ssss", $nama, $jenis_kelamin, $deskripsi, $file_name);
+
+    // Eksekusi statement
+    $stmt->execute();
 
     // Tutup statement
     $stmt->close();
+
+    // Tutup koneksi
     $connection->close();
+
+    // Redirect ke halaman sukses atau halaman lain yang sesuai
+    header("Location: post.php"); // Sesuaikan dengan halaman sukses Anda
+    echo 'Data Post Berhasil Disimpan';
+    exit();
 } else {
-    echo json_encode([
-        'message' => 'Title and/or content is not defined'
-    ]);
+    // Jika bukan metode POST, redirect ke halaman lain atau tampilkan pesan kesalahan
+    header("Location: error.php"); // Sesuaikan dengan halaman error Anda
+    exit();
 }

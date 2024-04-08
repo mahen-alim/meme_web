@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+// Periksa apakah pengguna belum login
+if (!isset($_SESSION['email'])) {
+    // Jika belum login, arahkan ke halaman login
+    header("Location: login.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +14,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile | P Gabut</title>
+    <title>Post | P Gabut</title>
     <link rel="stylesheet" href="post.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,6 +44,122 @@ session_start();
 
         .row {
             margin-top: 130px;
+        }
+
+        .card {
+            display: flex;
+            gap: 48px;
+        }
+
+        .col-12 {
+            margin-top: -50px;
+            width: 40%;
+            height: 100rem;
+            border-right: 1px solid black;
+        }
+
+        .col-13 {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin-top: -45px;
+            background-color: #ECECC6;
+            margin-left: -47.5px;
+            padding-left: 30px;
+        }
+
+        .input-form {
+            margin: 20px;
+            width: 85%;
+        }
+
+        .form-control {
+            display: flex;
+            margin-top: 10px;
+            border-radius: 20px;
+            width: 93%;
+            height: 30px;
+            border: 2px dashed black;
+            padding-left: 10px;
+        }
+
+        .form-file {
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        .area-control {
+            display: flex;
+            margin-top: 10px;
+            border-radius: 20px;
+            width: 90%;
+            height: 250px;
+            border: 2px dashed black;
+            padding: 10px;
+            resize: none;
+        }
+
+        .header-post {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .img-post {
+            width: 165px;
+            height: 165px;
+            border-radius: 20px;
+            box-sizing: border-box;
+        }
+
+        .btn-plus {
+            width: 95%;
+            height: 40px;
+            background-color: lightyellow;
+            color: black;
+            border: 1px solid black;
+            border-radius: 50px;
+            margin-top: 30px;
+        }
+
+        .header-post-title {
+            display: flex;
+        }
+
+        .header-post-title img {
+            width: 30px;
+            height: 30px;
+            margin-top: 23px;
+            margin-left: 10px;
+        }
+
+        #postTitle {
+            width: max-content;
+            padding: 10px;
+            background-color: lightyellow;
+            border-radius: 10px;
+        }
+
+        .newText {
+            width: max-content;
+            height: 20px;
+            padding: 10px;
+            background-color: lightyellow;
+            border-radius: 10px;
+            margin-left: 10px;
+            margin-top: 20.5px;
+            text-align: left;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        #arrowImg:hover {
+            cursor: pointer;
+        }
+
+        .fadeIn {
+            opacity: 1;
         }
     </style>
 </head>
@@ -94,19 +217,11 @@ session_start();
                     <form action="create.php" method="post" enctype="multipart/form-data">
                         <div class="input-form">
                             <label for="">Nama</label>
-                            <input class="form-control" type="text" name="nama" id="nama">
-                        </div>
-                        <div class="input-form">
-                            <label for="">Usia</label>
-                            <input class="form-control" type="number" name="usia" id="usia">
+                            <input class="form-control" type="text" name="nama" id="nama" required>
                         </div>
                         <div class="input-form">
                             <label for="">Jenis Kelamin</label>
-                            <input class="form-control" type="text" name="jenis_kelamin" id="jenis_kelamin">
-                        </div>
-                        <div class="input-form">
-                            <label for="">Pekerjaan</label>
-                            <input class="form-control" type="text" name="pekerjaan" id="pekerjaan">
+                            <input class="form-control" type="text" name="jenis_kelamin" id="jenis_kelamin" required>
                         </div>
                         <div class="input-form">
                             <label for="">Deskripsi</label>
@@ -114,16 +229,94 @@ session_start();
                         </div>
                         <div class="input-form">
                             <label for="">Foto Meme</label>
-                            <input class="form-file" type="file" name="file" id="file">
+                            <input class="form-file" type="file" name="file" id="file" required>
                         </div>
                         <div class="input-form">
                             <input class="btn-plus" type="submit" value="Tambahkan" style="font-family: Tilt Neon, sans-serif; font-size: 15px;">
                         </div>
                     </form>
                 </div>
+                <div class="col-13">
+                    <div class="header-post-title">
+                        <h3 id="postTitle">Semua Postingan</h3>
+                        <img id="arrowImg" src="img/all-arrow.png" alt="">
+                    </div>
+
+                    <div class="header-post">
+                        <?php
+                        // Mendapatkan daftar semua file di folder "uploads/"
+                        $files = glob('uploads/*');
+
+                        // Mengurutkan file berdasarkan tanggal modifikasi (file terbaru akan berada di atas)
+                        array_multisort(array_map('filemtime', $files), SORT_DESC, $files);
+
+                        // Mengambil 7 file terbaru
+                        $latest_files = array_slice($files, 0, 20);
+
+                        // Menampilkan gambar-gambar tersebut
+                        foreach ($latest_files as $file) {
+                        ?>
+                            <img class="img-post" src="<?php echo $file; ?>" alt="">
+                        <?php
+                        }
+                        ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        // Membuat variabel untuk menyimpan status gambar (di sebelah kiri atau kanan)
+        let imgOnLeft = true;
+
+        // Mendapatkan elemen gambar dan judul postingan
+        const arrowImg = document.getElementById('arrowImg');
+        const postTitle = document.getElementById('postTitle');
+
+        // Menambahkan event listener untuk klik pada gambar
+        arrowImg.addEventListener('click', function() {
+            // Menghapus teks yang sudah ada
+            const newTextElements = document.querySelectorAll('.newText');
+            newTextElements.forEach(element => {
+                element.parentNode.removeChild(element);
+            });
+
+            // Mengubah teks judul postingan
+            if (imgOnLeft) {
+                // Menambahkan teks dengan efek fade-in
+                setTimeout(() => {
+                    postTitle.insertAdjacentHTML('afterend', '<span class="newText">Meme Receh</span>');
+                    postTitle.nextElementSibling.classList.add('fadeIn');
+                }, 100);
+
+                setTimeout(() => {
+                    postTitle.insertAdjacentHTML('afterend', '<span class="newText">Meme Halal</span>');
+                    postTitle.nextElementSibling.classList.add('fadeIn');
+                }, 200);
+
+                setTimeout(() => {
+                    postTitle.insertAdjacentHTML('afterend', '<span class="newText">Meme Candid</span>');
+                    postTitle.nextElementSibling.classList.add('fadeIn');
+                }, 300);
+
+                setTimeout(() => {
+                    postTitle.insertAdjacentHTML('afterend', '<span class="newText">Meme Random</span>');
+                    postTitle.nextElementSibling.classList.add('fadeIn');
+                }, 400);
+            }
+
+            // Mengubah gambar dan menggesernya ke kanan atau kiri
+            if (imgOnLeft) {
+                arrowImg.src = 'img/all-arrow.png';
+            } else {
+                arrowImg.src = 'img/all-arrow.png';
+            }
+
+            // Memperbarui status gambar (di sebelah kiri atau kanan)
+            imgOnLeft = !imgOnLeft;
+        });
+    </script>
 
 </body>
 

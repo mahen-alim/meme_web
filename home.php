@@ -1,6 +1,7 @@
 <?php
 session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,9 +24,18 @@ session_start();
             <div class="nav-item">
                 <ul>
                     <li><a href="home.php" class="active">Home</a></li>
-                    <li><a href="post.php">Post</a></li>
+                    <?php
+                    // Periksa apakah session 'email' sudah ada
+                    if (isset($_SESSION['email'])) {
+                        // Jika sudah login, tampilkan link ke post.php
+                    ?>
+                        <li><a href="post.php">Post</a></li>
+                    <?php
+                    }
+                    ?>
                     <li><a href="#">Tentang Kami</a></li>
                 </ul>
+
             </div>
             <div class="nav-btn-auth">
                 <?php
