@@ -23,7 +23,7 @@ session_start();
             </div>
             <div class="nav-item">
                 <ul>
-                    <li><a href="home.php" class="active">Home</a></li>
+                    <li><a href="home.php" class="active" disabled>Home</a></li>
                     <?php
                     // Periksa apakah session 'email' sudah ada
                     if (isset($_SESSION['email'])) {
@@ -33,6 +33,7 @@ session_start();
                     <?php
                     }
                     ?>
+                    <li><a href="meme.php">Meme</a></li>
                     <li><a href="about_me.php">Tentang Kami</a></li>
                 </ul>
 

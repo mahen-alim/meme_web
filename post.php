@@ -63,7 +63,7 @@ if (!isset($_SESSION['email'])) {
             display: flex;
             flex-direction: column;
             margin-top: -45px;
-            background-color: #ECECC6;
+            background-color: white;
             margin-left: -47.5px;
             padding-left: 30px;
         }
@@ -177,7 +177,16 @@ if (!isset($_SESSION['email'])) {
             <div class="nav-item">
                 <ul>
                     <li><a href="home.php">Home</a></li>
-                    <li><a href="post.php" class="active">Post</a></li>
+                    <?php
+                    // Periksa apakah session 'email' sudah ada
+                    if (isset($_SESSION['email'])) {
+                        // Jika sudah login, tampilkan link ke post.php
+                    ?>
+                        <li><a href="post.php" class="active">Post</a></li>
+                    <?php
+                    }
+                    ?>
+                    <li><a href="meme.php">Meme</a></li>
                     <li><a href="about_me.php">Tentang Kami</a></li>
                 </ul>
             </div>
