@@ -13,6 +13,18 @@ session_start();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
+    <style>
+        .footer-txt-con {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-left: 20px;
+        }
+
+        #meme-con {
+            margin-left: -50px;
+        }
+    </style>
 </head>
 
 <body>
@@ -136,10 +148,23 @@ session_start();
                     </div>
                     <div class="sub-list-meme">
                         <div class="col-list-img">
-                            <img class="desc-logo" src="img/cahaya-ilahi.jpg" alt="">
-                            <img class="desc-logo" src="img/halo-dek.jpg" alt="">
-                            <img class="desc-logo" src="img/medure.jpg" alt="">
-                            <img class="desc-logo" src="img/ok-sip.jpg" alt="">
+                            <?php
+                            // Mendapatkan daftar semua file di folder "uploads/"
+                            $files = glob('uploads/*');
+
+                            // Mengurutkan file berdasarkan tanggal modifikasi (file terbaru akan berada di atas)
+                            array_multisort(array_map('filemtime', $files), SORT_DESC, $files);
+
+                            // Mengambil 7 file terbaru
+                            $latest_files = array_slice($files, 0, 4);
+
+                            // Menampilkan gambar-gambar tersebut
+                            foreach ($latest_files as $file) {
+                            ?>
+                                <img class="desc-logo" src="<?php echo $file; ?>" alt="">
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
                     <label for="line" class="underline-list"></label>
@@ -198,7 +223,7 @@ session_start();
                         </a>
                     </div>
                 </div>
-                <div class="footer-txt-con">
+                <div class="footer-txt-con" id="meme-con">
                     <h3>Meme</h3>
                     <a href="#">Kategori</a>
                     <a href="#">Postingan</a>

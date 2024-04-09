@@ -17,6 +17,7 @@ session_start();
         body {
             scroll-behavior: smooth;
             overflow-x: hidden;
+            background: linear-gradient(to top, lightyellow, white);
             font-family: "Tilt Neon", sans-serif;
             font-optical-sizing: auto;
             font-weight: 400;
@@ -29,6 +30,7 @@ session_start();
             justify-content: center;
             flex-wrap: wrap;
             gap: 20px;
+            margin-top: 100px;
         }
 
         .row {
@@ -48,9 +50,14 @@ session_start();
             background-color: #fff;
         }
 
+        .card h5 {
+            margin-top: -5px;
+        }
+
         .card img {
             width: 100%;
             border-radius: 8px;
+            margin-top: -10px;
         }
 
         .sos-reac {
@@ -203,10 +210,29 @@ session_start();
             background-color: lightyellow;
             border-radius: 20px;
         }
+
+        .title-container {
+            padding: 10px;
+            text-align: start;
+            margin-top: 100px;
+            margin-bottom: -200px;
+        }
+
+        .title-container h3 {
+            width: max-content;
+            background-color: lightyellow;
+            padding: 10px;
+            border: 2px dashed black;
+            border-radius: 10px;
+            margin-left: 90px;
+        }
     </style>
 </head>
 
 <body>
+    <div class="title-container">
+        <h3>Semua Postingan</h3>
+    </div>
     <div class="container">
         <nav class="navbar">
             <div class="img-con">
@@ -263,8 +289,13 @@ session_start();
             </div>
 
         </nav>
+        <!-- <div class="title-con">
+            <h3>Semua Postingan</h3>
+        </div> -->
+        <div class="con-body"></div>
         <div class="row">
             <div class="card">
+                <h5>ini nama meme</h5>
                 <img src="img/brokoli.avif" alt="Gambar Postingan">
                 <div class="sos-reac">
                     <i class="fa-solid fa-heart"></i>
@@ -272,26 +303,8 @@ session_start();
                     <i class="fa-solid fa-share"></i>
                 </div>
                 <div class="body-con">
-                    <h3>Ini Nama Akun</h3>
-                    <h5>Ini Deskripsi</h5>
-                </div>
-                <div class="comen-con">
-                    <h5>Lihat semua XX komentar</h5>
-                    <!-- <i class="fa-solid fa-heart"></i> -->
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="card">
-                <img src="img/brokoli.avif" alt="Gambar Postingan">
-                <div class="sos-reac">
-                    <i class="fa-solid fa-heart"></i>
-                    <i class="fa-regular fa-comment"></i>
-                    <i class="fa-solid fa-share"></i>
-                </div>
-                <div class="body-con">
-                    <h3>Ini Nama Akun</h3>
-                    <h5>Ini Deskripsi</h5>
+                    <h4>Ini Nama Akun</h4>
+                    <h6>Ini Deskripsi</h6>
                 </div>
                 <div class="comen-con">
                     <h5>Lihat semua XX komentar</h5>
@@ -301,6 +314,7 @@ session_start();
         </div>
         <div class="row">
             <div class="card">
+                <h5>ini nama meme</h5>
                 <img src="img/brokoli.avif" alt="Gambar Postingan">
                 <div class="sos-reac">
                     <i class="fa-solid fa-heart"></i>
@@ -308,8 +322,8 @@ session_start();
                     <i class="fa-solid fa-share"></i>
                 </div>
                 <div class="body-con">
-                    <h3>Ini Nama Akun</h3>
-                    <h5>Ini Deskripsi</h5>
+                    <h4>Ini Nama Akun</h4>
+                    <h6>Ini Deskripsi</h6>
                 </div>
                 <div class="comen-con">
                     <h5>Lihat semua XX komentar</h5>
@@ -319,6 +333,7 @@ session_start();
         </div>
         <div class="row">
             <div class="card">
+                <h5>ini nama meme</h5>
                 <img src="img/brokoli.avif" alt="Gambar Postingan">
                 <div class="sos-reac">
                     <i class="fa-solid fa-heart"></i>
@@ -326,8 +341,47 @@ session_start();
                     <i class="fa-solid fa-share"></i>
                 </div>
                 <div class="body-con">
-                    <h3>Ini Nama Akun</h3>
-                    <h5>Ini Deskripsi</h5>
+                    <h4>Ini Nama Akun</h4>
+                    <h6>Ini Deskripsi</h6>
+                </div>
+                <div class="comen-con">
+                    <h5>Lihat semua XX komentar</h5>
+                    <!-- <i class="fa-solid fa-heart"></i> -->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <h5>ini nama meme</h5>
+                <img src="img/brokoli.avif" alt="Gambar Postingan">
+                <div class="sos-reac">
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-regular fa-comment"></i>
+                    <i class="fa-solid fa-share"></i>
+                </div>
+                <div class="body-con">
+                    <h4>Ini Nama Akun</h4>
+                    <h6>Ini Deskripsi</h6>
+                </div>
+                <div class="comen-con">
+                    <h5>Lihat semua XX komentar</h5>
+                    <!-- <i class="fa-solid fa-heart"></i> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="row2">
+            <div class="card">
+                <h5>ini nama meme</h5>
+                <img src="img/brokoli.avif" alt="Gambar Postingan">
+                <div class="sos-reac">
+                    <i class="fa-solid fa-heart"></i>
+                    <i class="fa-regular fa-comment"></i>
+                    <i class="fa-solid fa-share"></i>
+                </div>
+                <div class="body-con">
+                    <h4>Ini Nama Akun</h4>
+                    <h6>Ini Deskripsi</h6>
                 </div>
                 <div class="comen-con">
                     <h5>Lihat semua XX komentar</h5>
@@ -337,6 +391,7 @@ session_start();
         </div>
         <div class="row2">
             <div class="card">
+                <h5>ini nama meme</h5>
                 <img src="img/brokoli.avif" alt="Gambar Postingan">
                 <div class="sos-reac">
                     <i class="fa-solid fa-heart"></i>
@@ -344,8 +399,8 @@ session_start();
                     <i class="fa-solid fa-share"></i>
                 </div>
                 <div class="body-con">
-                    <h3>Ini Nama Akun</h3>
-                    <h5>Ini Deskripsi</h5>
+                    <h4>Ini Nama Akun</h4>
+                    <h6>Ini Deskripsi</h6>
                 </div>
                 <div class="comen-con">
                     <h5>Lihat semua XX komentar</h5>
@@ -355,6 +410,7 @@ session_start();
         </div>
         <div class="row2">
             <div class="card">
+                <h5>ini nama meme</h5>
                 <img src="img/brokoli.avif" alt="Gambar Postingan">
                 <div class="sos-reac">
                     <i class="fa-solid fa-heart"></i>
@@ -362,8 +418,8 @@ session_start();
                     <i class="fa-solid fa-share"></i>
                 </div>
                 <div class="body-con">
-                    <h3>Ini Nama Akun</h3>
-                    <h5>Ini Deskripsi</h5>
+                    <h4>Ini Nama Akun</h4>
+                    <h6>Ini Deskripsi</h6>
                 </div>
                 <div class="comen-con">
                     <h5>Lihat semua XX komentar</h5>
@@ -373,6 +429,7 @@ session_start();
         </div>
         <div class="row2">
             <div class="card">
+                <h5>ini nama meme</h5>
                 <img src="img/brokoli.avif" alt="Gambar Postingan">
                 <div class="sos-reac">
                     <i class="fa-solid fa-heart"></i>
@@ -380,26 +437,8 @@ session_start();
                     <i class="fa-solid fa-share"></i>
                 </div>
                 <div class="body-con">
-                    <h3>Ini Nama Akun</h3>
-                    <h5>Ini Deskripsi</h5>
-                </div>
-                <div class="comen-con">
-                    <h5>Lihat semua XX komentar</h5>
-                    <!-- <i class="fa-solid fa-heart"></i> -->
-                </div>
-            </div>
-        </div>
-        <div class="row2">
-            <div class="card">
-                <img src="img/brokoli.avif" alt="Gambar Postingan">
-                <div class="sos-reac">
-                    <i class="fa-solid fa-heart"></i>
-                    <i class="fa-regular fa-comment"></i>
-                    <i class="fa-solid fa-share"></i>
-                </div>
-                <div class="body-con">
-                    <h3>Ini Nama Akun</h3>
-                    <h5>Ini Deskripsi</h5>
+                    <h4>Ini Nama Akun</h4>
+                    <h6>Ini Deskripsi</h6>
                 </div>
                 <div class="comen-con">
                     <h5>Lihat semua XX komentar</h5>

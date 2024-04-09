@@ -20,6 +20,15 @@ if (!isset($_SESSION['email'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
     <style>
+        body {
+            background: linear-gradient(to top, lightyellow, white);
+            font-family: "Tilt Neon", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-variation-settings: "XROT" 0, "YROT" 0;
+        }
+
         .navbar {
             width: 100%;
             display: flex;
@@ -52,7 +61,7 @@ if (!isset($_SESSION['email'])) {
         }
 
         .col-12 {
-            margin-top: -50px;
+            margin-top: -45px;
             width: 40%;
             height: 100rem;
             border-right: 1px solid black;
@@ -62,10 +71,10 @@ if (!isset($_SESSION['email'])) {
             width: 100%;
             display: flex;
             flex-direction: column;
-            margin-top: -45px;
+            margin-top: -40px;
             background-color: white;
             margin-left: -47.5px;
-            padding-left: 30px;
+            padding-left: 47px;
         }
 
         .input-form {
@@ -76,7 +85,7 @@ if (!isset($_SESSION['email'])) {
         .form-control {
             display: flex;
             margin-top: 10px;
-            border-radius: 20px;
+            border-radius: 10px;
             width: 93%;
             height: 30px;
             border: 2px dashed black;
@@ -85,13 +94,12 @@ if (!isset($_SESSION['email'])) {
 
         .form-file {
             margin-top: 10px;
-            border-radius: 10px;
         }
 
         .area-control {
             display: flex;
             margin-top: 10px;
-            border-radius: 20px;
+            border-radius: 10px;
             width: 90%;
             height: 250px;
             border: 2px dashed black;
@@ -102,13 +110,13 @@ if (!isset($_SESSION['email'])) {
         .header-post {
             display: flex;
             flex-wrap: wrap;
-            gap: 30px;
+            gap: 50px;
         }
 
         .img-post {
-            width: 165px;
+            width: 180px;
             height: 165px;
-            border-radius: 20px;
+            border-radius: 10px;
             box-sizing: border-box;
         }
 
@@ -117,8 +125,8 @@ if (!isset($_SESSION['email'])) {
             height: 40px;
             background-color: lightyellow;
             color: black;
-            border: 1px solid black;
-            border-radius: 50px;
+            border: 2px dashed black;
+            border-radius: 10px;
             margin-top: 30px;
         }
 
@@ -138,13 +146,14 @@ if (!isset($_SESSION['email'])) {
             padding: 10px;
             background-color: lightyellow;
             border-radius: 10px;
+            border: 2px dashed black;
         }
 
         .newText {
             width: max-content;
             height: 20px;
             padding: 10px;
-            background-color: lightyellow;
+            background: linear-gradient(to top, lightyellow, #DCDCB3);
             border-radius: 10px;
             margin-left: 10px;
             margin-top: 20.5px;
@@ -156,6 +165,7 @@ if (!isset($_SESSION['email'])) {
 
         .newText:hover {
             cursor: pointer;
+            background: linear-gradient(to bottom, lightyellow, #DCDCB3);
         }
 
         #arrowImg:hover {

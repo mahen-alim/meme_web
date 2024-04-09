@@ -53,7 +53,7 @@ if (isset($_POST['email'], $_POST['password'])) {
     <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: lightyellow;
+            background: linear-gradient(to top, lightyellow, white);
             font-family: "Tilt Neon", sans-serif;
             font-optical-sizing: auto;
             font-weight: 400;
@@ -85,7 +85,7 @@ if (isset($_POST['email'], $_POST['password'])) {
             border-radius: 20px;
             width: 300px;
             height: 30px;
-            border: 5px solid lightyellow;
+            border: 2px solid lightyellow;
             padding-left: 10px;
         }
 
