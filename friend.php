@@ -1,101 +1,31 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meme | P Gabut</title>
-    <script src="https://kit.fontawesome.com/924b40cfb7.js" crossorigin="anonymous"></script>
+    <title>Friend | P Gabut</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
     <style>
         body {
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-            background: linear-gradient(to top, lightyellow, white);
+            background-color: black;
+            color: white;
             font-family: "Tilt Neon", sans-serif;
             font-optical-sizing: auto;
             font-weight: 400;
             font-style: normal;
             font-variation-settings: "XROT" 0, "YROT" 0;
+            overflow-x: hidden;
+            /* Mencegah pengguliran horizontal */
         }
 
-        .container {
+        .main-container {
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 200px;
-        }
-
-        .row2 {
-            margin-left: 100px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-
-        .card {
-            width: 300px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 10px;
-            background-color: #fff;
-            flex-basis: calc(20% - 10px);
-            margin-bottom: 20px;
-        }
-
-        .card h5 {
-            margin-top: -5px;
-        }
-
-        .card img {
-            width: 100%;
-            height: 250px;
-            border-radius: 8px;
-            margin-top: -10px;
-        }
-
-        .sos-reac {
-            display: flex;
-            justify-content: flex-start;
-            padding: 5px 0;
-            gap: 20px;
-        }
-
-        .sos-reac img {
-            width: 30px;
-            height: 30px;
-        }
-
-        .comen-con {
-            display: flex;
-            padding-top: 10px;
-            gap: 400px;
-        }
-
-        .comen-con h5 {
-            margin: 0;
-        }
-
-        .con-logo-like-comen img {
-            width: 20px;
-            height: 20px;
-        }
-
-        .body-con {
-            display: flex;
-            font-weight: bold;
-            gap: 10px;
-        }
-
-        .body-con h4 {
-            font-weight: medium;
         }
 
         .navbar {
@@ -174,74 +104,93 @@ session_start();
             border-radius: 10px;
         }
 
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: white;
-            min-width: 120px;
-            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            right: 46px;
-            /* Atur jarak dari sisi kanan */
-            margin-top: 35px;
-            border-radius: 20px;
-        }
-
-        /* Style untuk tombol profil */
-        .btn-auth-profil {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            margin-right: 80px;
-            /* Atur jarak dari sisi kanan */
-            float: right;
-        }
-
-        /* Style untuk tautan dalam dropdown */
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        /* Style untuk tautan dalam dropdown saat dihover */
-        .dropdown-content a:hover {
-            background-color: lightyellow;
-            border-radius: 20px;
-        }
-
-        .title-container {
-            padding: 10px;
-            text-align: start;
-            margin-top: 100px;
-            margin-bottom: -200px;
-        }
-
-        .title-container h3 {
+        .search-con {
+            display: flex;
             width: max-content;
-            background-color: lightyellow;
-            padding: 10px;
-            border: 2px dashed black;
+            height: 50px;
+            height: auto;
+            margin-top: 100px;
+            border: 1px solid white;
+            gap: 500px;
+            justify-content: space-between;
+            padding-left: 10px;
+            padding-right: 10px;
             border-radius: 10px;
-            margin-left: 90px;
+        }
+
+        .search-con:hover {
+            cursor: pointer;
+        }
+
+        .search-con img {
+            width: 30px;
+            height: 30px;
+            margin-top: 15px;
+        }
+
+        .body-con {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+            gap: 20px;
+        }
+
+        .card {
+            width: max-content;
+            height: 100px;
+            display: flex;
+            flex-direction: row;
+            border: 1px solid white;
+            border-radius: 10px;
+            padding: 20px;
+            gap: 30px;
+            box-shadow: 2px 2px 20px 2px white;
+        }
+
+        .card img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+        }
+
+        .card img:hover {
+            cursor: pointer;
+        }
+
+        .card h5 {
+            margin-right: 306px;
+        }
+
+        #comen {
+            margin-top: -10px;
+            margin-left: -490px;
+            color: #ccc;
+        }
+
+        #comen:hover {
+            cursor: pointer;
+        }
+
+        .line {
+            width: 93%;
+            height: 1px;
+            background-color: white;
+            margin-top: -60px;
         }
     </style>
 </head>
 
 <body>
-    <div class="title-container">
-        <h3>Semua Postingan</h3>
-    </div>
-    <div class="container">
+    <div class="main-container">
         <nav class="navbar">
             <div class="img-con">
                 <img class="logo" src="img/meme-c2.png" alt="">
             </div>
             <div class="nav-item">
                 <ul>
-                    <li><a href="home.php">Home</a></li>
+                    <li><a href="home.php" class="active" disabled>Home</a></li>
                     <?php
                     // Periksa apakah session 'email' sudah ada
                     if (isset($_SESSION['email'])) {
@@ -251,7 +200,7 @@ session_start();
                     <?php
                     }
                     ?>
-                    <li><a href="meme.php" class="active" disabled>Meme</a></li>
+                    <li><a href="meme.php">Meme</a></li>
                     <li><a href="about_me.php">Tentang Kami</a></li>
                 </ul>
 
@@ -290,43 +239,18 @@ session_start();
             </div>
 
         </nav>
-
-        <div class="row2">
-            <?php
-            // Mendapatkan daftar semua file di folder "uploads/"
-            $files = glob('uploads/*');
-
-            // Mengurutkan file berdasarkan tanggal modifikasi (file terbaru akan berada di atas)
-            array_multisort(array_map('filemtime', $files), SORT_DESC, $files);
-
-            // Mengambil 4 file terbaru
-            $latest_files = array_slice($files, 0, 12);
-
-            // Menampilkan gambar-gambar tersebut dalam card
-            foreach ($latest_files as $file) {
-                // Mendapatkan nama file dari path
-                $filename = basename($file);
-            ?>
-                <div class="card">
-                    <h5><?php echo $filename; ?></h5>
-                    <img src="<?php echo $file; ?>" alt="Gambar Postingan">
-                    <div class="sos-reac">
-                        <i class="fa-solid fa-heart"></i>
-                        <i class="fa-regular fa-comment"></i>
-                        <i class="fa-solid fa-share"></i>
-                    </div>
-                    <div class="body-con">
-                        <h4>Ini Nama Akun</h4>
-                        <h6>Ini Deskripsi</h6>
-                    </div>
-                    <div class="comen-con">
-                        <h5>Lihat semua XX komentar</h5>
-                        <!-- <i class="fa-solid fa-heart"></i> -->
-                    </div>
-                </div>
-            <?php
-            }
-            ?>
+        <div class="search-con">
+            <h5>Search...</h5>
+            <img src="img/search.png" alt="">
+        </div>
+        <div class="body-con">
+            <div class="card">
+                <img src="img/brokoli.avif" alt="">
+                <h5>ini nama teman</h5>
+                <img src="img/follow.png" alt="">
+            </div>
+            <div class="line"></div>
+            <h5 id="comen">ini pesan...</h5>
         </div>
     </div>
 

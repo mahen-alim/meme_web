@@ -24,6 +24,11 @@ session_start();
         #meme-con {
             margin-left: -50px;
         }
+
+        .desc-logo {
+            width: 150px;
+            height: 150px;
+        }
     </style>
 </head>
 
