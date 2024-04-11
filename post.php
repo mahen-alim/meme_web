@@ -114,8 +114,8 @@ if (!isset($_SESSION['email'])) {
         }
 
         .img-post {
-            width: 180px;
-            height: 165px;
+            width: 170px;
+            height: 170px;
             border-radius: 10px;
             box-sizing: border-box;
         }
@@ -197,6 +197,7 @@ if (!isset($_SESSION['email'])) {
                     }
                     ?>
                     <li><a href="meme.php">Meme</a></li>
+                    <li><a href="friend.php">Teman</a></li>
                     <li><a href="about_me.php">Tentang Kami</a></li>
                 </ul>
             </div>

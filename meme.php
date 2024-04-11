@@ -37,11 +37,10 @@ session_start();
             margin-left: 100px;
             display: flex;
             flex-wrap: wrap;
-            gap: 30px;
+            gap: 40px;
         }
 
         .card {
-            width: 300px;
             border: 1px solid #ccc;
             border-radius: 8px;
             padding: 10px;
@@ -59,6 +58,10 @@ session_start();
             height: 250px;
             border-radius: 8px;
             margin-top: -10px;
+        }
+
+        .card img:hover {
+            border-radius: 0px;
         }
 
         .sos-reac {
@@ -252,6 +255,7 @@ session_start();
                     }
                     ?>
                     <li><a href="meme.php" class="active" disabled>Meme</a></li>
+                    <li><a href="friend.php">Teman</a></li>
                     <li><a href="about_me.php">Tentang Kami</a></li>
                 </ul>
 
@@ -316,7 +320,7 @@ session_start();
                         <i class="fa-solid fa-share"></i>
                     </div>
                     <div class="body-con">
-                        <h4>Ini Nama Akun</h4>
+                        <h4>Rohingya</h4>
                         <h6>Ini Deskripsi</h6>
                     </div>
                     <div class="comen-con">

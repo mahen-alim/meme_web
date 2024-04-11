@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,9 +11,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
         body {
-            background-color: black;
+            height: 100rem;
+            background: linear-gradient(to top, lightyellow, white);
             color: white;
             font-family: "Tilt Neon", sans-serif;
             font-optical-sizing: auto;
@@ -27,6 +32,7 @@
             align-items: center;
             justify-content: center;
         }
+
 
         .navbar {
             width: 100%;
@@ -82,6 +88,43 @@
             color: black;
         }
 
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 120px;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            right: 46px;
+            /* Atur jarak dari sisi kanan */
+            margin-top: 35px;
+            border-radius: 20px;
+        }
+
+        /* Style untuk tombol profil */
+        .btn-auth-profil {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            margin-right: 80px;
+            /* Atur jarak dari sisi kanan */
+            float: right;
+        }
+
+        /* Style untuk tautan dalam dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Style untuk tautan dalam dropdown saat dihover */
+        .dropdown-content a:hover {
+            background-color: lightyellow;
+            border-radius: 20px;
+        }
+
         .nav-btn-auth {
             display: flex;
             margin-left: auto;
@@ -107,26 +150,34 @@
         .search-con {
             display: flex;
             width: max-content;
-            height: 50px;
             height: auto;
             margin-top: 100px;
-            border: 1px solid white;
-            gap: 500px;
+            border: 1px solid #ccc;
+            gap: 10px;
             justify-content: space-between;
-            padding-left: 10px;
-            padding-right: 10px;
+            padding: 10px;
             border-radius: 10px;
+            align-items: center;
+            background-color: white;
         }
 
-        .search-con:hover {
-            cursor: pointer;
+        #icon-search {
+            font-size: 30px;
+            color: #ccc;
         }
 
-        .search-con img {
-            width: 30px;
-            height: 30px;
-            margin-top: 15px;
+        #find {
+            width: 520px;
+            background-color: white;
+            border: 1px solid #ccc;
+            align-items: flex-start;
+            color: black;
+            padding: 5px;
+            border-radius: 5px;
+            font-weight: medium;
+            font-size: 15px;
         }
+
 
         .body-con {
             display: flex;
@@ -138,15 +189,16 @@
         }
 
         .card {
-            width: max-content;
+            width: 100%;
             height: 100px;
             display: flex;
             flex-direction: row;
-            border: 1px solid white;
             border-radius: 10px;
             padding: 20px;
-            gap: 30px;
-            box-shadow: 2px 2px 20px 2px white;
+            gap: 58px;
+            border: 1px solid #ccc;
+            background-color: white;
+            color: black;
         }
 
         .card img {
@@ -160,6 +212,7 @@
         }
 
         .card h5 {
+            margin-top: 10px;
             margin-right: 306px;
         }
 
@@ -173,11 +226,33 @@
             cursor: pointer;
         }
 
-        .line {
-            width: 93%;
-            height: 1px;
-            background-color: white;
-            margin-top: -60px;
+        .txt-users-con {
+            display: flex;
+            flex-direction: column;
+            margin-top: -10px;
+            margin-left: -30px;
+        }
+
+        .txt-users-con h6 {
+            font-weight: lighter;
+            margin-top: -20px;
+            color: black;
+        }
+
+        .txt-users-con i {
+            width: 128%;
+            border: 2px dashed black;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .txt-users-con p {
+            margin-top: 13px;
+            font-size: 15px;
+        }
+
+        .ph {
+            font-size: 30px;
         }
     </style>
 </head>
@@ -190,7 +265,7 @@
             </div>
             <div class="nav-item">
                 <ul>
-                    <li><a href="home.php" class="active" disabled>Home</a></li>
+                    <li><a href="home.php">Home</a></li>
                     <?php
                     // Periksa apakah session 'email' sudah ada
                     if (isset($_SESSION['email'])) {
@@ -201,9 +276,9 @@
                     }
                     ?>
                     <li><a href="meme.php">Meme</a></li>
+                    <li><a href="friend.php" class="active" disabled>Teman</a></li>
                     <li><a href="about_me.php">Tentang Kami</a></li>
                 </ul>
-
             </div>
             <div class="nav-btn-auth">
                 <?php
@@ -211,25 +286,25 @@
                 if (isset($_SESSION['email'])) {
                     // Jika ada, ubah tombol-tombol Login dan Register menjadi tombol profil
                     echo '<div class="dropdown">
-                    <button class="btn-auth-profil" onclick="toggleDropdown()">
-                        <img src="img/akun.png" alt="Profile">
-                    </button>
-                    <div id="dropdownMenu" class="dropdown-content" style="display: none;">
-                        <a href="profil.php">Profil</a>
-                        <a href="logout.php">Logout</a>
-                    </div>
-                </div>';
+                        <button class="btn-auth-profil" onclick="toggleDropdown()">
+                            <img src="img/akun.png" alt="Profile">
+                        </button>
+                        <div id="dropdownMenu" class="dropdown-content" style="display: none;">
+                            <a href="profil.php">Profil</a>
+                            <a href="logout.php">Logout</a>
+                        </div>
+                    </div>';
 
                     echo '<script>
-                    function toggleDropdown() {
-                        var dropdownMenu = document.getElementById("dropdownMenu");
-                        if (dropdownMenu.style.display === "block") {
-                            dropdownMenu.style.display = "none";
-                        } else {
-                            dropdownMenu.style.display = "block";
+                        function toggleDropdown() {
+                            var dropdownMenu = document.getElementById("dropdownMenu");
+                            if (dropdownMenu.style.display === "block") {
+                                dropdownMenu.style.display = "none";
+                            } else {
+                                dropdownMenu.style.display = "block";
+                            }
                         }
-                    }
-                </script>';
+                    </script>';
                 } else {
                     // Jika tidak ada sesi email, tampilkan tombol Login dan Register
                     echo '<a class="btn-auth" href="login.php">Login</a>';
@@ -239,18 +314,34 @@
             </div>
 
         </nav>
-        <div class="search-con">
-            <h5>Search...</h5>
-            <img src="img/search.png" alt="">
-        </div>
-        <div class="body-con">
-            <div class="card">
-                <img src="img/brokoli.avif" alt="">
-                <h5>ini nama teman</h5>
-                <img src="img/follow.png" alt="">
+        <form action="" method="get">
+            <div class="search-con">
+                <input type="text" name="find" id="find">
+                <i class="ph ph-magnifying-glass" id="icon-search"></i>
             </div>
-            <div class="line"></div>
-            <h5 id="comen">ini pesan...</h5>
+        </form>
+        <div class="body-con">
+            <?php
+            require 'koneksi.php';
+
+            $sql = "SELECT * FROM users";
+            $hasil = mysqli_query($connection, $sql);
+            $nomer = 1;
+            while ($data = mysqli_fetch_array($hasil, MYSQLI_ASSOC)) {
+            ?>
+                <div class="card">
+                    <img src="img/brokoli.avif" alt="">
+                    <div class="txt-users-con">
+                        <h5><?php echo $data['nama']; ?></h5>
+                        <h6><?php echo $data['meme_favorit']; ?></h6>
+                        <i></i>
+                        <p>ini pesan...</p>
+                    </div>
+                    <i class="ph ph-user-plus"></i>
+                </div>
+            <?php
+            }
+            ?>
         </div>
     </div>
 

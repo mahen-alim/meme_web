@@ -13,6 +13,7 @@ session_start();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
         .footer-txt-con {
             display: flex;
@@ -28,6 +29,14 @@ session_start();
         .desc-logo {
             width: 150px;
             height: 150px;
+        }
+
+        .post {
+            width: 100%;
+            display: flex;
+            gap: 50px;
+            text-align: center;
+            justify-content: space-between;
         }
     </style>
 </head>
@@ -51,9 +60,9 @@ session_start();
                     }
                     ?>
                     <li><a href="meme.php">Meme</a></li>
+                    <li><a href="friend.php">Teman</a></li>
                     <li><a href="about_me.php">Tentang Kami</a></li>
                 </ul>
-
             </div>
             <div class="nav-btn-auth">
                 <?php
@@ -115,21 +124,21 @@ session_start();
                 </div>
             </div>
             <div class="post">
-                <a href="post.php" class="any-post">
+                <a href="meme.php" class="any-post">
                     <img class="post-logo" src="img/receh.jpg" alt="">
-                    <h3>Meme Receh Post</h3>
+                    <h3>Meme Receh</h3>
                 </a>
-                <a href="post.php" class="any-post">
+                <a href="meme.php" class="any-post">
                     <img class="post-logo" src="img/moslem.avif" alt="">
-                    <h3>Meme Halal Post</h3>
+                    <h3>Meme Halal</h3>
                 </a>
-                <a href="post.php" class="any-post">
+                <a href="meme.php" class="any-post">
                     <img class="post-logo" src="img/brokoli.avif" alt="">
-                    <h3>Meme Candid Post</h3>
+                    <h3>Meme Candid</h3>
                 </a>
-                <a href="post.php" class="any-post">
+                <a href="meme.php" class="any-post">
                     <img class="post-logo" src="img/botak.avif" alt="">
-                    <h3>Meme Random Post</h3>
+                    <h3>Meme Random</h3>
                 </a>
             </div>
 
