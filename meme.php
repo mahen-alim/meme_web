@@ -230,6 +230,10 @@ session_start();
             border-radius: 10px;
             margin-left: 90px;
         }
+
+        .btn-auth-profil img {
+            width: 30px;
+        }
     </style>
 </head>
 
@@ -267,7 +271,7 @@ session_start();
                     // Jika ada, ubah tombol-tombol Login dan Register menjadi tombol profil
                     echo '<div class="dropdown">
                     <button class="btn-auth-profil" onclick="toggleDropdown()">
-                        <img src="img/akun.png" alt="Profile">
+                        <img src="img/profil.png" alt="Profile">
                     </button>
                     <div id="dropdownMenu" class="dropdown-content" style="display: none;">
                         <a href="profil.php">Profil</a>
@@ -297,40 +301,61 @@ session_start();
 
         <div class="row2">
             <?php
+            require 'koneksi.php';
+
             // Mendapatkan daftar semua file di folder "uploads/"
             $files = glob('uploads/*');
 
             // Mengurutkan file berdasarkan tanggal modifikasi (file terbaru akan berada di atas)
             array_multisort(array_map('filemtime', $files), SORT_DESC, $files);
 
-            // Mengambil 4 file terbaru
+            // Mengambil 12 file terbaru
             $latest_files = array_slice($files, 0, 12);
 
             // Menampilkan gambar-gambar tersebut dalam card
             foreach ($latest_files as $file) {
                 // Mendapatkan nama file dari path
                 $filename = basename($file);
+
+                // Mengambil data nama dan deskripsi dari tabel users dan post
+                $sql = "SELECT users.nama, post.deskripsi, post.foto
+            FROM users
+            JOIN post ON users.id_users = post.id_users
+            WHERE post.foto = ?";
+                $stmt = $connection->prepare($sql);
+                $stmt->bind_param("s", $filename);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    $data = $result->fetch_assoc();
+                    // Mendapatkan nama file dari kolom foto di tabel post
+                    $foto = $data['foto'];
             ?>
-                <div class="card">
-                    <h5><?php echo $filename; ?></h5>
-                    <img src="<?php echo $file; ?>" alt="Gambar Postingan">
-                    <div class="sos-reac">
-                        <i class="fa-solid fa-heart"></i>
-                        <i class="fa-regular fa-comment"></i>
-                        <i class="fa-solid fa-share"></i>
+                    <div class="card">
+                        <h5><?php echo $filename; ?></h5>
+                        <img src="<?php echo $file; ?>" alt="Gambar Postingan">
+                        <div class="sos-reac">
+                            <i class="fa-solid fa-heart"></i>
+                            <i class="fa-regular fa-comment"></i>
+                            <i class="fa-solid fa-share"></i>
+                        </div>
+                        <div class="body-con">
+                            <h4><?php echo $data['nama']; ?></h4>
+                            <h6><?php echo $data['deskripsi']; ?></h6>
+                        </div>
+                        <div class="comen-con">
+                            <h5>Lihat semua XX komentar</h5>
+                            <!-- <i class="fa-solid fa-heart"></i> -->
+                        </div>
                     </div>
-                    <div class="body-con">
-                        <h4>Rohingya</h4>
-                        <h6>Ini Deskripsi</h6>
-                    </div>
-                    <div class="comen-con">
-                        <h5>Lihat semua XX komentar</h5>
-                        <!-- <i class="fa-solid fa-heart"></i> -->
-                    </div>
-                </div>
             <?php
+                } else {
+                    echo "Data tidak ditemukan.";
+                }
             }
             ?>
+
         </div>
     </div>
 

@@ -107,8 +107,11 @@ session_start();
             border: none;
             cursor: pointer;
             margin-right: 80px;
-            /* Atur jarak dari sisi kanan */
             float: right;
+        }
+
+        .btn-auth-profil img{
+            width: 30px;
         }
 
         /* Style untuk tautan dalam dropdown */
@@ -241,7 +244,7 @@ session_start();
 
         .txt-users-con i {
             width: 128%;
-            border: 2px dashed black;
+            border: 2px dashed #ccc;
             border-radius: 10px;
             margin-top: 10px;
         }
@@ -249,10 +252,83 @@ session_start();
         .txt-users-con p {
             margin-top: 13px;
             font-size: 15px;
+            color: #ccc;
+        }
+
+        .txt-users-con p:hover {
+            cursor: pointer;
+            color: black;
         }
 
         .ph {
             font-size: 30px;
+            color: #ccc;
+        }
+
+        .ph:hover {
+            color: black;
+            cursor: pointer;
+        }
+
+        /* Style the modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Style the textarea */
+        #commentField {
+            width: 100%;
+            resize: vertical;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        /* Style the submit button */
+        #submitComment {
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            border: 2px dashed black;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #submitComment:hover {
+            background-color: lightyellow;
         }
     </style>
 </head>
@@ -287,7 +363,7 @@ session_start();
                     // Jika ada, ubah tombol-tombol Login dan Register menjadi tombol profil
                     echo '<div class="dropdown">
                         <button class="btn-auth-profil" onclick="toggleDropdown()">
-                            <img src="img/akun.png" alt="Profile">
+                            <img src="img/profil.png" alt="Profile">
                         </button>
                         <div id="dropdownMenu" class="dropdown-content" style="display: none;">
                             <a href="profil.php">Profil</a>
@@ -335,7 +411,15 @@ session_start();
                         <h5><?php echo $data['nama']; ?></h5>
                         <h6><?php echo $data['meme_favorit']; ?></h6>
                         <i></i>
-                        <p>ini pesan...</p>
+                        <p id="openModal">ini pesan...</p>
+
+                        <div id="myModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <textarea id="commentField" placeholder="Tambahkan komentar..." rows="4"></textarea>
+                                <button id="submitComment">Kirim</button>
+                            </div>
+                        </div>
                     </div>
                     <i class="ph ph-user-plus"></i>
                 </div>
@@ -344,6 +428,34 @@ session_start();
             ?>
         </div>
     </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("openModal");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 

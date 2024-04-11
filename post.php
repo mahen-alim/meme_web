@@ -175,6 +175,11 @@ if (!isset($_SESSION['email'])) {
         .fadeIn {
             opacity: 1;
         }
+
+
+        .btn-auth-profil img {
+            width: 30px;
+        }
     </style>
 </head>
 
@@ -208,7 +213,7 @@ if (!isset($_SESSION['email'])) {
                     // Jika ada, ubah tombol-tombol Login dan Register menjadi tombol profil
                     echo '<div class="dropdown">
                     <button class="btn-auth-profil" onclick="toggleDropdown()">
-                        <img src="img/akun.png" alt="Profile">
+                        <img src="img/profil.png" alt="Profile">
                     </button>
                     <div id="dropdownMenu" class="dropdown-content" style="display: none;">
                         <a href="profil.php">Profil</a>

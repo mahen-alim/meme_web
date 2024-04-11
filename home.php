@@ -38,6 +38,11 @@ session_start();
             text-align: center;
             justify-content: space-between;
         }
+
+
+        .btn-auth-profil img {
+            width: 30px;
+        }
     </style>
 </head>
 
@@ -71,7 +76,7 @@ session_start();
                     // Jika ada, ubah tombol-tombol Login dan Register menjadi tombol profil
                     echo '<div class="dropdown">
                     <button class="btn-auth-profil" onclick="toggleDropdown()">
-                        <img src="img/akun.png" alt="Profile">
+                        <img src="img/profil.png" alt="Profile">
                     </button>
                     <div id="dropdownMenu" class="dropdown-content" style="display: none;">
                         <a href="profil.php">Profil</a>
