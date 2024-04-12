@@ -72,7 +72,7 @@ if (!isset($_SESSION['email'])) {
             display: flex;
             flex-direction: column;
             margin-top: -40px;
-            background-color: white;
+            background: linear-gradient(to top, lightyellow, white);
             margin-left: -47.5px;
             padding-left: 47px;
         }
@@ -273,22 +273,44 @@ if (!isset($_SESSION['email'])) {
 
                     <div class="header-post">
                         <?php
-                        // Mendapatkan daftar semua file di folder "uploads/"
-                        $files = glob('uploads/*');
 
-                        // Mengurutkan file berdasarkan tanggal modifikasi (file terbaru akan berada di atas)
-                        array_multisort(array_map('filemtime', $files), SORT_DESC, $files);
+                        if (isset($_SESSION['email'])) {
+                            require_once 'koneksi.php'; // Sambungkan ke database
 
-                        // Mengambil 7 file terbaru
-                        $latest_files = array_slice($files, 0, 20);
+                            // Ambil email dari session
+                            $email = $_SESSION['email'];
 
-                        // Menampilkan gambar-gambar tersebut
-                        foreach ($latest_files as $file) {
+                            // Query untuk mendapatkan id_users dari tabel users berdasarkan email
+                            $query_user_id = "SELECT id_users FROM users WHERE email = ?";
+                            $stmt_user_id = $connection->prepare($query_user_id);
+                            $stmt_user_id->bind_param("s", $email);
+                            $stmt_user_id->execute();
+                            $result_user_id = $stmt_user_id->get_result();
+                            $row_user_id = $result_user_id->fetch_assoc();
+                            $id_users = $row_user_id['id_users'];
+
+                            // Query untuk mendapatkan nama file dari tabel post berdasarkan id_users
+                            $query_files = "SELECT foto FROM post WHERE id_users = ?";
+                            $stmt_files = $connection->prepare($query_files);
+                            $stmt_files->bind_param("i", $id_users);
+                            $stmt_files->execute();
+                            $result_files = $stmt_files->get_result();
+
+                            // Menampilkan gambar-gambar tersebut
+                            while ($row_file = $result_files->fetch_assoc()) {
+                                $filename = $row_file['foto'];
                         ?>
-                            <img class="img-post" src="<?php echo $file; ?>" alt="">
+                                <img class="img-post" src="uploads/<?php echo $filename; ?>" alt="">
                         <?php
+                            }
+
+                            // Tutup koneksi dan statement
+                            $stmt_files->close();
+                            $stmt_user_id->close();
+                            $connection->close();
                         }
                         ?>
+
                     </div>
                 </div>
             </div>

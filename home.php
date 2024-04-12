@@ -108,7 +108,7 @@ session_start();
                 <img src="img/brokoli.avif" alt="">
                 <div class="title-desc-con">
                     <h2>Selamat Datang Memers, Cari Meme Favoritmu!</h2>
-                    <form action="">
+                    <form action="search_meme.php" method="post">
                         <div class="search-con">
                             <select class="search-input" name="kategori" id="exampleInputPrice" style="font-family: Tilt Neon, sans-serif; font-size: 15px;">
                                 <option value="" disabled selected>Pilih Kategori</option>

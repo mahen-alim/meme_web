@@ -319,9 +319,9 @@ session_start();
 
                 // Mengambil data nama dan deskripsi dari tabel users dan post
                 $sql = "SELECT users.nama, post.deskripsi, post.foto
-            FROM users
-            JOIN post ON users.id_users = post.id_users
-            WHERE post.foto = ?";
+                        FROM users
+                        JOIN post ON users.id_users = post.id_users
+                        WHERE post.foto = ?";
                 $stmt = $connection->prepare($sql);
                 $stmt->bind_param("s", $filename);
                 $stmt->execute();

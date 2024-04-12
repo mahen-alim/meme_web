@@ -110,7 +110,7 @@ session_start();
             float: right;
         }
 
-        .btn-auth-profil img{
+        .btn-auth-profil img {
             width: 30px;
         }
 
@@ -167,6 +167,10 @@ session_start();
         #icon-search {
             font-size: 30px;
             color: #ccc;
+        }
+
+        #icon-search:hover {
+            color: black;
         }
 
         #find {
@@ -244,7 +248,7 @@ session_start();
 
         .txt-users-con i {
             width: 128%;
-            border: 2px dashed #ccc;
+            border: 2px dashed black;
             border-radius: 10px;
             margin-top: 10px;
         }
