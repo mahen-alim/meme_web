@@ -39,9 +39,21 @@ session_start();
             justify-content: space-between;
         }
 
-
         .btn-auth-profil img {
             width: 30px;
+        }
+
+        /* Style untuk tombol notifikasi */
+        .notification-btn {
+            background-color: lightyellow;
+            border: none;
+            border-radius: 10px;
+            color: black;
+            padding: 10px 32px;
+            text-align: center;
+            font-size: 15px;
+            margin: 2px 10px 20px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -70,30 +82,33 @@ session_start();
                 </ul>
             </div>
             <div class="nav-btn-auth">
+                <!-- Tombol notifikasi -->
+                <button class="notification-btn" onclick="showNotification()">Notifikasi</button>
+
                 <?php
                 // Setelah penanganan login, periksa apakah ada sesi email
                 if (isset($_SESSION['email'])) {
                     // Jika ada, ubah tombol-tombol Login dan Register menjadi tombol profil
                     echo '<div class="dropdown">
-                    <button class="btn-auth-profil" onclick="toggleDropdown()">
-                        <img src="img/profil.png" alt="Profile">
-                    </button>
-                    <div id="dropdownMenu" class="dropdown-content" style="display: none;">
-                        <a href="profil.php">Profil</a>
-                        <a href="logout.php">Logout</a>
-                    </div>
-                </div>';
+                <button class="btn-auth-profil" onclick="toggleDropdown()">
+                    <img src="img/profil.png" alt="Profile">
+                </button>
+                <div id="dropdownMenu" class="dropdown-content" style="display: none;">
+                    <a href="profil.php">Profil</a>
+                    <a href="logout.php">Logout</a>
+                </div>
+            </div>';
 
                     echo '<script>
-                    function toggleDropdown() {
-                        var dropdownMenu = document.getElementById("dropdownMenu");
-                        if (dropdownMenu.style.display === "block") {
-                            dropdownMenu.style.display = "none";
-                        } else {
-                            dropdownMenu.style.display = "block";
-                        }
+                function toggleDropdown() {
+                    var dropdownMenu = document.getElementById("dropdownMenu");
+                    if (dropdownMenu.style.display === "block") {
+                        dropdownMenu.style.display = "none";
+                    } else {
+                        dropdownMenu.style.display = "block";
                     }
-                </script>';
+                }
+            </script>';
                 } else {
                     // Jika tidak ada sesi email, tampilkan tombol Login dan Register
                     echo '<a class="btn-auth" href="login.php">Login</a>';
@@ -101,7 +116,6 @@ session_start();
                 }
                 ?>
             </div>
-
         </nav>
         <div class="container">
             <div class="img-icon">
@@ -279,6 +293,45 @@ session_start();
         });
     </script>
 
+    <script>
+        // Fungsi untuk menampilkan notifikasi
+        function showNotification() {
+            // Simulasi data reaksi yang diterima
+            var reaksi = [{
+                    pengguna: 'User1',
+                    tipe: 'like'
+                },
+                {
+                    pengguna: 'User2',
+                    tipe: 'komentar'
+                },
+                {
+                    pengguna: 'User3',
+                    tipe: 'like'
+                }
+                // Anda dapat menambahkan data reaksi lainnya sesuai kebutuhan
+            ];
+
+            // Filter reaksi yang berasal dari akun mahennekkers27@gmail.com
+            var reaksiMahen = reaksi.filter(function(item) {
+                return item.pengguna === 'mahennekkers27@gmail.com';
+            });
+
+            // Buat pesan notifikasi berdasarkan reaksi yang ditemukan
+            var pesanNotifikasi = '';
+            if (reaksiMahen.length > 0) {
+                pesanNotifikasi += 'Akun mahennekkers27@gmail.com menerima reaksi:\n\n';
+                reaksiMahen.forEach(function(reaksi) {
+                    pesanNotifikasi += ' - ' + reaksi.tipe + ' dari ' + reaksi.pengguna + '\n';
+                });
+            } else {
+                pesanNotifikasi = 'Tidak ada reaksi dari akun mahennekkers27@gmail.com.';
+            }
+
+            // Tampilkan pesan notifikasi
+            alert(pesanNotifikasi);
+        }
+    </script>
 
 </body>
 

@@ -234,6 +234,19 @@ session_start();
         .btn-auth-profil img {
             width: 30px;
         }
+
+        /* Style untuk tombol notifikasi */
+        .notification-button {
+            background-color: lightyellow;
+            border: none;
+            border-radius: 10px;
+            color: black;
+            padding: 10px 32px;
+            text-align: center;
+            font-size: 15px;
+            margin: 2px 10px 20px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -265,6 +278,9 @@ session_start();
 
             </div>
             <div class="nav-btn-auth">
+                <!-- Tombol notifikasi -->
+                <button class="notification-button">Notification</button>
+
                 <?php
                 // Setelah penanganan login, periksa apakah ada sesi email
                 if (isset($_SESSION['email'])) {
@@ -318,10 +334,10 @@ session_start();
                 $filename = basename($file);
 
                 // Mengambil data nama dan deskripsi dari tabel users dan post
-                $sql = "SELECT users.nama, post.deskripsi, post.foto
-                        FROM users
-                        JOIN post ON users.id_users = post.id_users
-                        WHERE post.foto = ?";
+                $sql = "SELECT users.nama, post.deskripsi, post.foto, post.id_post
+            FROM users
+            JOIN post ON users.id_users = post.id_users
+            WHERE post.foto = ?";
                 $stmt = $connection->prepare($sql);
                 $stmt->bind_param("s", $filename);
                 $stmt->execute();
@@ -331,15 +347,22 @@ session_start();
                     $data = $result->fetch_assoc();
                     // Mendapatkan nama file dari kolom foto di tabel post
                     $foto = $data['foto'];
+                    $post_id = $data['id_post'];
             ?>
                     <div class="card">
                         <h5><?php echo $filename; ?></h5>
                         <img src="<?php echo $file; ?>" alt="Gambar Postingan">
                         <div class="sos-reac">
-                            <i class="fa-solid fa-heart"></i>
+                            <form action="like_post.php" method="POST">
+                                <!-- Tambahkan input tersembunyi untuk menyimpan data yang akan dikirim -->
+                                <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
+                                <button type="submit" class="like-button">Like</button>
+                            </form>
+
                             <i class="fa-regular fa-comment"></i>
                             <i class="fa-solid fa-share"></i>
                         </div>
+
                         <div class="body-con">
                             <h4><?php echo $data['nama']; ?></h4>
                             <h6><?php echo $data['deskripsi']; ?></h6>
