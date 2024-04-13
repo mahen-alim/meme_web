@@ -110,14 +110,14 @@ session_start();
                     <h2>Selamat Datang Memers, Cari Meme Favoritmu!</h2>
                     <form action="search_meme.php" method="post">
                         <div class="search-con">
-                            <select class="search-input" name="kategori" id="exampleInputPrice" style="font-family: Tilt Neon, sans-serif; font-size: 15px;">
+                            <select class="search-input" name="kategori" id="exampleInputPrice" style="font-family: Tilt Neon, sans-serif; font-size: 15px;" required>
                                 <option value="" disabled selected>Pilih Kategori</option>
                                 <option value="Meme Receh">Meme Receh</option>
                                 <option value="Meme Halal">Meme Halal</option>
                                 <option value="Meme Candid">Meme Candid</option>
                                 <option value="Meme Random">Meme Random</option>
                             </select>
-                            <select class="search-input" name="gender" id="exampleInputPrice" style="font-family: Tilt Neon, sans-serif; font-size: 15px;">
+                            <select class="search-input" name="gender" id="exampleInputPrice" style="font-family: Tilt Neon, sans-serif; font-size: 15px;" required>
                                 <option value="" disabled selected>Pilih Gender</option>
                                 <option value="Laki-Laki">Laki-Laki</option>
                                 <option value="Perempuan">Perempuan</option>
@@ -174,8 +174,8 @@ session_start();
                             // Mengurutkan file berdasarkan tanggal modifikasi (file terbaru akan berada di atas)
                             array_multisort(array_map('filemtime', $files), SORT_DESC, $files);
 
-                            // Mengambil 7 file terbaru
-                            $latest_files = array_slice($files, 0, 4);
+                            // Mengambil 6 file terbaru
+                            $latest_files = array_slice($files, 0, 6);
 
                             // Menampilkan gambar-gambar tersebut
                             foreach ($latest_files as $file) {

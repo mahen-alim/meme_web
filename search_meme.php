@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,6 +8,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Meme | P Gabut</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
     <style>
         body {
             height: 100rem;
@@ -134,6 +140,11 @@
             float: right;
         }
 
+        .btn-auth-profil img {
+            width: 30px;
+            height: 30px;
+        }
+
         /* Style untuk tautan dalam dropdown */
         .dropdown-content a {
             color: black;
@@ -247,7 +258,7 @@
             </div>
             <div class="nav-item">
                 <ul>
-                    <li><a href="home.php" class="active" disabled>Home</a></li>
+                    <li><a href="home.php">Home</a></li>
                     <?php
                     // Periksa apakah session 'email' sudah ada
                     if (isset($_SESSION['email'])) {

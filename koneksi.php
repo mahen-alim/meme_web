@@ -1,10 +1,14 @@
 <?php
 
-$connection = new mysqli("localhost", "root", "", "human");
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "human";
 
-// Cek koneksi database
-if ($connection->connect_error) {
-    die("Connection failed: " . $connection->connect_error);
-} else {
-    // echo 'connected to database';
+// Create connection
+$connection = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$connection) {
+    die("Connection failed: " . mysqli_connect_error());
 }
+//  else { echo "Berhasil";}
