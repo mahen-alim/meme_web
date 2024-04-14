@@ -13,6 +13,7 @@ session_start();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
         body {
             scroll-behavior: smooth;
@@ -95,6 +96,7 @@ session_start();
             display: flex;
             font-weight: bold;
             gap: 10px;
+            margin-top: -20px;
         }
 
         .body-con h4 {
@@ -158,9 +160,9 @@ session_start();
         .nav-btn-auth {
             display: flex;
             margin-left: auto;
-            margin-top: 30px;
             font-size: 15px;
             text-align: center;
+            align-items: center;
         }
 
         .btn-auth {
@@ -247,6 +249,84 @@ session_start();
             margin: 2px 10px 20px;
             cursor: pointer;
         }
+
+        .like-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        /* Style for the love icon */
+        .like-button i {
+            font-size: 24px;
+            padding: 3px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+            /* Add transition for smooth effect */
+            cursor: pointer;
+        }
+
+        /* Hover effect */
+        .like-button i:hover {
+            background-color: #ff0000;
+            /* Change background color on hover */
+            color: white;
+        }
+
+        /* Active (clicked) effect */
+        .like-button i.active {
+            background-color: #ff0000;
+            /* Change background color when clicked */
+            color: white;
+        }
+
+
+        #sos-icon {
+            font-size: 24px;
+            /* Sesuaikan ukuran ikon sesuai kebutuhan */
+            color: black;
+            /* Sesuaikan warna ikon sesuai kebutuhan */
+        }
+
+        .total_likes {
+            width: max-content;
+            height: 20px;
+            background-color: white;
+            margin-right: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            text-align: center;
+        }
+
+        .total_likes:hover {
+            cursor: pointer;
+        }
+
+        .total_likes i {
+            font-size: 24px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            padding: 12px 16px;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
     </style>
 </head>
 
@@ -278,8 +358,15 @@ session_start();
 
             </div>
             <div class="nav-btn-auth">
-                <!-- Tombol notifikasi -->
-                <button class="notification-button">Notification</button>
+                <?php
+                require_once 'get_likes_count.php'; // Sertakan file dengan fungsi pengambilan jumlah likes
+
+                // Panggil fungsi untuk mengambil jumlah likes
+                $likesCount = getLikesCount();
+                ?>
+
+                <!-- Tampilkan label dengan jumlah likes -->
+                <label class='total_likes' id='likesLabel'><i class='ph ph-bell'></i><?php echo $likesCount; ?></label>
 
                 <?php
                 // Setelah penanganan login, periksa apakah ada sesi email
@@ -353,14 +440,18 @@ session_start();
                         <h5><?php echo $filename; ?></h5>
                         <img src="<?php echo $file; ?>" alt="Gambar Postingan">
                         <div class="sos-reac">
+                            <!-- Love icon -->
+
                             <form action="like_post.php" method="POST">
                                 <!-- Tambahkan input tersembunyi untuk menyimpan data yang akan dikirim -->
-                                <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
-                                <button type="submit" class="like-button">Like</button>
+                                <input type="hidden" id="post_id" name="post_id" value="<?php echo $post_id; ?>">
+                                <button type="submit" class="like-button">
+                                    <i class="ph ph-heart" onclick="toggleLike(this)"></i>
+                                </button>
                             </form>
 
-                            <i class="fa-regular fa-comment"></i>
-                            <i class="fa-solid fa-share"></i>
+                            <i class="ph ph-chat-circle" id="sos-icon"></i>
+                            <i class="ph ph-share-fat" id="sos-icon"></i>
                         </div>
 
                         <div class="body-con">
@@ -373,14 +464,68 @@ session_start();
                         </div>
                     </div>
             <?php
-                } else {
-                    echo "Data tidak ditemukan.";
                 }
             }
             ?>
 
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tangkap elemen label
+            var likesLabel = document.getElementById('likesLabel');
+
+            // Tambahkan event listener untuk menangani tindakan klik
+            likesLabel.addEventListener('click', function() {
+                // Kirim permintaan AJAX ke server untuk mengatur jumlah likes menjadi 0
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // Tangkap respons dari server
+                        var response = xhr.responseText;
+
+                        // Perbarui jumlah likes pada label menjadi 0
+                        likesLabel.textContent = 0;
+                    }
+                };
+
+                // Kirim permintaan POST ke file PHP yang menghandle reset jumlah likes
+                xhr.open('POST', 'reset_likes.php', true);
+                xhr.send();
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tangkap elemen label
+            var likesLabel = document.getElementById('likesLabel');
+
+            // Tambahkan event listener untuk menangani tindakan klik
+            likesLabel.addEventListener('click', function() {
+                // Kirim permintaan AJAX ke server untuk mengatur jumlah likes menjadi 0
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // Tangkap respons dari server
+                        var response = xhr.responseText;
+
+                        // Perbarui jumlah likes pada label menjadi 0
+                        likesLabel.textContent = 0;
+
+                        // Tampilkan daftar pengguna yang melakukan like
+                        alert(response);
+                    }
+                };
+
+                // Kirim permintaan POST ke file PHP yang menghandle reset jumlah likes
+                xhr.open('POST', 'reset_likes.php', true);
+                xhr.send();
+            });
+        });
+    </script>
+
 
 </body>
 
