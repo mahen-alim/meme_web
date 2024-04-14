@@ -57,8 +57,6 @@ if (isset($_POST['post_id'])) {
 
     // Tutup statement
     $stmt_add_like->close();
-
-    header('Location: meme.php');
 } else {
     // Jika data post_id tidak diterima, alihkan ke halaman lain
     header('Location: home.php');

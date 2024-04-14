@@ -80,7 +80,7 @@ session_start();
         .comen-con {
             display: flex;
             padding-top: 10px;
-            gap: 400px;
+            margin-bottom: auto;
         }
 
         .comen-con h5 {
@@ -96,7 +96,7 @@ session_start();
             display: flex;
             font-weight: bold;
             gap: 10px;
-            margin-top: -20px;
+            margin-top: -10px;
         }
 
         .body-con h4 {
@@ -304,9 +304,36 @@ session_start();
 
         #sos-icon {
             font-size: 24px;
-            /* Sesuaikan ukuran ikon sesuai kebutuhan */
+            padding: 3px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+            /* Add transition for smooth effect */
+            cursor: pointer;
+            margin-top: -3px;
+        }
+
+        #sos-icon:hover {
+            background-color: lightyellow;
             color: black;
-            /* Sesuaikan warna ikon sesuai kebutuhan */
+        }
+
+        #sos-icon-dots {
+            font-size: 24px;
+            padding: 3px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+            /* Add transition for smooth effect */
+            cursor: pointer;
+            margin-top: -3px;
+            margin-left: auto;
+            font-weight: bold;
+        }
+
+        #sos-icon-dots:hover {
+            background-color: lightyellow;
+            color: black;
         }
 
         .total_likes {
@@ -471,6 +498,7 @@ session_start();
 
                             <i class="ph ph-chat-circle" id="sos-icon"></i>
                             <i class="ph ph-share-fat" id="sos-icon"></i>
+                            <i class="ph ph-dots-three-vertical" id="sos-icon-dots"></i>
                         </div>
 
                         <div class="body-con">
