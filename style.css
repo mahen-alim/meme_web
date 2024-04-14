@@ -118,13 +118,14 @@ body {
   gap: 20px;
 }
 
-.nav-btn-auth {
+/* .nav-btn-auth {
   display: flex;
   margin-left: auto;
   margin-top: 30px;
   font-size: 15px;
   text-align: center;
-}
+  align-item: center;
+} */
 
 .btn-auth {
   text-decoration: none;
@@ -488,4 +489,3 @@ body {
   background-color: lightyellow;
   border-radius: 20px;
 }
-

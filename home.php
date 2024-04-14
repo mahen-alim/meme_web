@@ -55,6 +55,34 @@ session_start();
             margin: 2px 10px 20px;
             cursor: pointer;
         }
+
+        .total_likes {
+            width: max-content;
+            height: 20px;
+            background-color: white;
+            margin-right: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            text-align: center;
+        }
+
+        .total_likes:hover {
+            cursor: pointer;
+        }
+
+        .total_likes i {
+            font-size: 24px;
+        }
+
+        .nav-btn-auth {
+            display: flex;
+            margin-left: auto;
+            font-size: 15px;
+            text-align: center;
+            align-items: center;
+            margin-top: 0px;
+        }
     </style>
 </head>
 
@@ -82,8 +110,15 @@ session_start();
                 </ul>
             </div>
             <div class="nav-btn-auth">
-                <!-- Tombol notifikasi -->
-                <button class="notification-btn" onclick="showNotification()">Notifikasi</button>
+                <?php
+                require_once 'get_likes_count.php'; // Sertakan file dengan fungsi pengambilan jumlah likes
+
+                // Panggil fungsi untuk mengambil jumlah likes
+                $likesCount = getLikesCount();
+                ?>
+
+                <!-- Tampilkan label dengan jumlah likes -->
+                <label class='total_likes' id='likesLabel'><i class='ph ph-bell'></i><?php echo $likesCount; ?></label>
 
                 <?php
                 // Setelah penanganan login, periksa apakah ada sesi email
@@ -294,43 +329,32 @@ session_start();
     </script>
 
     <script>
-        // Fungsi untuk menampilkan notifikasi
-        function showNotification() {
-            // Simulasi data reaksi yang diterima
-            var reaksi = [{
-                    pengguna: 'User1',
-                    tipe: 'like'
-                },
-                {
-                    pengguna: 'User2',
-                    tipe: 'komentar'
-                },
-                {
-                    pengguna: 'User3',
-                    tipe: 'like'
-                }
-                // Anda dapat menambahkan data reaksi lainnya sesuai kebutuhan
-            ];
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tangkap elemen label
+            var likesLabel = document.getElementById('likesLabel');
 
-            // Filter reaksi yang berasal dari akun mahennekkers27@gmail.com
-            var reaksiMahen = reaksi.filter(function(item) {
-                return item.pengguna === 'mahennekkers27@gmail.com';
+            // Tambahkan event listener untuk menangani tindakan klik
+            likesLabel.addEventListener('click', function() {
+                // Kirim permintaan AJAX ke server untuk mengatur jumlah likes menjadi 0
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // Tangkap respons dari server
+                        var response = xhr.responseText;
+
+                        // Perbarui jumlah likes pada label menjadi 0
+                        likesLabel.textContent = 0;
+
+                        // Tampilkan daftar pengguna yang melakukan like
+                        alert(response);
+                    }
+                };
+
+                // Kirim permintaan POST ke file PHP yang menghandle reset jumlah likes
+                xhr.open('POST', 'reset_likes.php', true);
+                xhr.send();
             });
-
-            // Buat pesan notifikasi berdasarkan reaksi yang ditemukan
-            var pesanNotifikasi = '';
-            if (reaksiMahen.length > 0) {
-                pesanNotifikasi += 'Akun mahennekkers27@gmail.com menerima reaksi:\n\n';
-                reaksiMahen.forEach(function(reaksi) {
-                    pesanNotifikasi += ' - ' + reaksi.tipe + ' dari ' + reaksi.pengguna + '\n';
-                });
-            } else {
-                pesanNotifikasi = 'Tidak ada reaksi dari akun mahennekkers27@gmail.com.';
-            }
-
-            // Tampilkan pesan notifikasi
-            alert(pesanNotifikasi);
-        }
+        });
     </script>
 
 </body>

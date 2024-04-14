@@ -19,6 +19,7 @@ if (!isset($_SESSION['email'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
         body {
             background: linear-gradient(to top, lightyellow, white);
@@ -72,7 +73,7 @@ if (!isset($_SESSION['email'])) {
             display: flex;
             flex-direction: column;
             margin-top: -40px;
-            background: linear-gradient(to top, lightyellow, white);
+            background-color: white;
             margin-left: -47.5px;
             padding-left: 47px;
         }
@@ -176,9 +177,36 @@ if (!isset($_SESSION['email'])) {
             opacity: 1;
         }
 
-
         .btn-auth-profil img {
             width: 30px;
+        }
+
+        .total_likes {
+            width: max-content;
+            height: 20px;
+            background-color: white;
+            margin-right: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            text-align: center;
+        }
+
+        .total_likes:hover {
+            cursor: pointer;
+        }
+
+        .total_likes i {
+            font-size: 24px;
+        }
+
+        .nav-btn-auth {
+            display: flex;
+            margin-left: auto;
+            font-size: 15px;
+            text-align: center;
+            align-items: center;
+            margin-top: 0px;
         }
     </style>
 </head>
@@ -207,6 +235,16 @@ if (!isset($_SESSION['email'])) {
                 </ul>
             </div>
             <div class="nav-btn-auth">
+                <?php
+                require_once 'get_likes_count.php'; // Sertakan file dengan fungsi pengambilan jumlah likes
+
+                // Panggil fungsi untuk mengambil jumlah likes
+                $likesCount = getLikesCount();
+                ?>
+
+                <!-- Tampilkan label dengan jumlah likes -->
+                <label class='total_likes' id='likesLabel'><i class='ph ph-bell'></i><?php echo $likesCount; ?></label>
+
                 <?php
                 // Setelah penanganan login, periksa apakah ada sesi email
                 if (isset($_SESSION['email'])) {
@@ -366,6 +404,35 @@ if (!isset($_SESSION['email'])) {
 
             // Memperbarui status gambar (di sebelah kiri atau kanan)
             imgOnLeft = !imgOnLeft;
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tangkap elemen label
+            var likesLabel = document.getElementById('likesLabel');
+
+            // Tambahkan event listener untuk menangani tindakan klik
+            likesLabel.addEventListener('click', function() {
+                // Kirim permintaan AJAX ke server untuk mengatur jumlah likes menjadi 0
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // Tangkap respons dari server
+                        var response = xhr.responseText;
+
+                        // Perbarui jumlah likes pada label menjadi 0
+                        likesLabel.textContent = 0;
+
+                        // Tampilkan daftar pengguna yang melakukan like
+                        alert(response);
+                    }
+                };
+
+                // Kirim permintaan POST ke file PHP yang menghandle reset jumlah likes
+                xhr.open('POST', 'reset_likes.php', true);
+                xhr.send();
+            });
         });
     </script>
 

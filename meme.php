@@ -157,6 +157,25 @@ session_start();
             color: black;
         }
 
+        .total_likes {
+            width: max-content;
+            height: 20px;
+            background-color: white;
+            margin-right: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            text-align: center;
+        }
+
+        .total_likes:hover {
+            cursor: pointer;
+        }
+
+        .total_likes i {
+            font-size: 24px;
+        }
+
         .nav-btn-auth {
             display: flex;
             margin-left: auto;
@@ -470,32 +489,6 @@ session_start();
 
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Tangkap elemen label
-            var likesLabel = document.getElementById('likesLabel');
-
-            // Tambahkan event listener untuk menangani tindakan klik
-            likesLabel.addEventListener('click', function() {
-                // Kirim permintaan AJAX ke server untuk mengatur jumlah likes menjadi 0
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        // Tangkap respons dari server
-                        var response = xhr.responseText;
-
-                        // Perbarui jumlah likes pada label menjadi 0
-                        likesLabel.textContent = 0;
-                    }
-                };
-
-                // Kirim permintaan POST ke file PHP yang menghandle reset jumlah likes
-                xhr.open('POST', 'reset_likes.php', true);
-                xhr.send();
-            });
-        });
-    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
