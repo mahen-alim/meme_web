@@ -69,7 +69,7 @@ session_start();
             display: flex;
             justify-content: flex-start;
             padding: 5px 0;
-            gap: 20px;
+            gap: 10px;
         }
 
         .sos-reac img {
@@ -319,6 +319,7 @@ session_start();
         }
 
         #sos-icon-dots {
+            height: max-content;
             font-size: 24px;
             padding: 3px;
             border-radius: 5px;
@@ -326,12 +327,31 @@ session_start();
             transition: background-color 0.3s;
             /* Add transition for smooth effect */
             cursor: pointer;
-            margin-top: -3px;
             margin-left: auto;
             font-weight: bold;
+            margin-top: -5px;
         }
 
         #sos-icon-dots:hover {
+            background-color: lightyellow;
+            color: black;
+        }
+
+        #sos-icon-download {
+            height: max-content;
+            font-size: 24px;
+            padding: 3px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+            /* Add transition for smooth effect */
+            cursor: pointer;
+            margin-left: auto;
+            font-weight: bold;
+            margin-top: -5px;
+        }
+
+        #sos-icon-download:hover {
             background-color: lightyellow;
             color: black;
         }
@@ -372,6 +392,18 @@ session_start();
 
         .dropdown:hover .dropdown-content {
             display: block;
+        }
+
+        .card-header-title-con {
+            display: flex;
+        }
+
+        .card-header-title-con h5 {
+            margin-top: 5px;
+        }
+
+        .body-container {
+            margin-top: 3px;
         }
     </style>
 </head>
@@ -483,31 +515,36 @@ session_start();
                     $post_id = $data['id_post'];
             ?>
                     <div class="card">
-                        <h5><?php echo $filename; ?></h5>
-                        <img src="<?php echo $file; ?>" alt="Gambar Postingan">
-                        <div class="sos-reac">
-                            <!-- Love icon -->
-
-                            <form action="like_post.php" method="POST">
-                                <!-- Tambahkan input tersembunyi untuk menyimpan data yang akan dikirim -->
-                                <input type="hidden" id="post_id" name="post_id" value="<?php echo $post_id; ?>">
-                                <button type="submit" class="like-button">
-                                    <i class="ph ph-heart" onclick="toggleLike(this)"></i>
-                                </button>
-                            </form>
-
-                            <i class="ph ph-chat-circle" id="sos-icon"></i>
-                            <i class="ph ph-share-fat" id="sos-icon"></i>
+                        <div class="card-header-title-con">
+                            <h5><?php echo $filename; ?></h5>
                             <i class="ph ph-dots-three-vertical" id="sos-icon-dots"></i>
                         </div>
+                        <div class="body-container">
+                            <img src="<?php echo $file; ?>" alt="Gambar Postingan">
+                            <div class="sos-reac">
+                                <!-- Love icon -->
 
-                        <div class="body-con">
-                            <h4><?php echo $data['nama']; ?></h4>
-                            <h6><?php echo $data['deskripsi']; ?></h6>
-                        </div>
-                        <div class="comen-con">
-                            <h5>Lihat semua XX komentar</h5>
-                            <!-- <i class="fa-solid fa-heart"></i> -->
+                                <form action="like_post.php" method="POST">
+                                    <!-- Tambahkan input tersembunyi untuk menyimpan data yang akan dikirim -->
+                                    <input type="hidden" id="post_id" name="post_id" value="<?php echo $post_id; ?>">
+                                    <button type="submit" class="like-button">
+                                        <i class="ph ph-heart" onclick="toggleLike(this)"></i>
+                                    </button>
+                                </form>
+
+                                <i class="ph ph-chat-circle" id="sos-icon"></i>
+                                <i class="ph ph-share-fat" id="sos-icon"></i>
+                                <i class="ph ph-download-simple" id="sos-icon-download"></i>
+                            </div>
+
+                            <div class="body-con">
+                                <h4><?php echo $data['nama']; ?></h4>
+                                <h6><?php echo $data['deskripsi']; ?></h6>
+                            </div>
+                            <div class="comen-con">
+                                <h5>Lihat semua XX komentar</h5>
+                                <!-- <i class="fa-solid fa-heart"></i> -->
+                            </div>
                         </div>
                     </div>
             <?php
