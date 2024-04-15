@@ -405,6 +405,46 @@ session_start();
         .body-container {
             margin-top: 3px;
         }
+
+        .modal-content textarea {
+            width: 210px;
+            resize: none;
+            height: max-content;
+            border-radius: 5px;
+            text-align: start;
+            border: 1px solid #ccc;
+            color: black;
+        }
+
+        .modal-content button {
+            border: none;
+            border-radius: 5px;
+            text-align: start;
+            background-color: white;
+            color: black;
+            box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.2);
+            font-family: "Tilt Neon", sans-serif;
+            padding: 3px;
+            height: max-content;
+        }
+
+        .modal-content button:hover {
+            background-color: lightyellow;
+            color: black;
+            cursor: pointer;
+        }
+
+        .pesan-container {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+
+        .pesan-container button i {
+            font-size: 24px;
+            margin-left: auto;
+        }
     </style>
 </head>
 
@@ -545,6 +585,17 @@ session_start();
                                 <h5>Lihat semua XX komentar</h5>
                                 <!-- <i class="fa-solid fa-heart"></i> -->
                             </div>
+                            <!-- Tambahkan elemen modal -->
+                            <div id="commentModal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close" onclick="closeModal()"></span>
+                                    <div class="pesan-container">
+                                        <textarea placeholder="Tulis komentar..."></textarea>
+                                        <button onclick="postComment()"><i class="ph ph-paper-plane-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
             <?php
@@ -584,6 +635,30 @@ session_start();
         });
     </script>
 
+    <!-- Script untuk menampilkan modal -->
+    <script>
+        // Fungsi untuk menampilkan modal
+        function showModal() {
+            var modal = document.getElementById('commentModal');
+            modal.style.display = 'block';
+        }
+
+        // Fungsi untuk menutup modal
+        function closeModal() {
+            var modal = document.getElementById('commentModal');
+            modal.style.display = 'none';
+        }
+
+        // Fungsi untuk mem-posting komentar (Anda dapat menyesuaikan fungsinya)
+        function postComment() {
+            // Ambil nilai komentar dari textarea
+            var comment = document.querySelector('#commentModal textarea').value;
+            // Lakukan sesuatu dengan komentar, misalnya kirim ke server atau tampilkan di halaman
+            console.log('Komentar:', comment);
+            // Tutup modal setelah posting
+            closeModal();
+        }
+    </script>
 
 </body>
 
