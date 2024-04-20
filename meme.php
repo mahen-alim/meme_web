@@ -104,7 +104,7 @@ session_start();
             font-weight: bold;
         }
 
-        .body-con h6{
+        .body-con h6 {
             margin-top: 23.5px;
             font-weight: medium;
             font-size: 12px;
@@ -210,13 +210,14 @@ session_start();
             display: none;
             position: absolute;
             background-color: white;
-            min-width: 120px;
             box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
             z-index: 1;
-            right: 46px;
+            right: 0px;
+            top: 0px;
             /* Atur jarak dari sisi kanan */
             margin-top: 35px;
-            border-radius: 20px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
         }
 
         /* Style untuk tombol profil */
@@ -404,6 +405,12 @@ session_start();
             display: flex;
         }
 
+        .card-header-title-con .dropdown {
+            margin-left: auto;
+            text-align: center;
+        }
+
+
         .card-header-title-con h5 {
             margin-top: 5px;
         }
@@ -563,7 +570,13 @@ session_start();
                     <div class="card">
                         <div class="card-header-title-con">
                             <h5><?php echo $filename; ?></h5>
-                            <i class="ph ph-dots-three-vertical" id="sos-icon-dots"></i>
+                            <div class="dropdown">
+                                <i class="ph ph-dots-three-vertical" id="sos-icon-dots"></i>
+                                <div class="dropdown-content" id="dropdown-content">
+                                    <a href="#">Edit</a>
+                                    <a href="#">Delete</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="body-container">
                             <img src="<?php echo $file; ?>" alt="Gambar Postingan">
