@@ -99,8 +99,15 @@ session_start();
             margin-top: -10px;
         }
 
-        .body-con h4 {
+        .body-con h5 {
+            margin-top: 23px;
+            font-weight: bold;
+        }
+
+        .body-con h6{
+            margin-top: 23.5px;
             font-weight: medium;
+            font-size: 12px;
         }
 
         .navbar {
@@ -323,9 +330,8 @@ session_start();
             font-size: 24px;
             padding: 3px;
             border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
-            /* Add transition for smooth effect */
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 1s;
             cursor: pointer;
             margin-left: auto;
             font-weight: bold;
@@ -540,9 +546,9 @@ session_start();
 
                 // Mengambil data nama dan deskripsi dari tabel users dan post
                 $sql = "SELECT users.nama, post.deskripsi, post.foto, post.id_post
-            FROM users
-            JOIN post ON users.id_users = post.id_users
-            WHERE post.foto = ?";
+                        FROM users
+                        JOIN post ON users.id_users = post.id_users
+                        WHERE post.foto = ?";
                 $stmt = $connection->prepare($sql);
                 $stmt->bind_param("s", $filename);
                 $stmt->execute();
@@ -578,7 +584,7 @@ session_start();
                             </div>
 
                             <div class="body-con">
-                                <h4><?php echo $data['nama']; ?></h4>
+                                <h5><?php echo $data['nama']; ?></h5>
                                 <h6><?php echo $data['deskripsi']; ?></h6>
                             </div>
                             <div class="comen-con">
