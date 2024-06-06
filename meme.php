@@ -717,15 +717,15 @@ session_start();
 
                 // Mengambil data nama dan deskripsi dari tabel users dan post
                 $sql = "SELECT users.nama, post.deskripsi, post.foto, post.id_post, latest_comment.comment AS latest_comment, latest_comment.nama AS comment_author
-                FROM users
-                JOIN post ON users.id_users = post.id_users
-                LEFT JOIN (
-                    SELECT c.comment, u.nama, c.id_post
-                    FROM comments AS c  
-                    JOIN users AS u ON c.id_users = u.id_users
-                    ORDER BY c.created_at DESC
-                ) AS latest_comment ON post.id_post = latest_comment.id_post
-                WHERE post.foto = ?";
+                        FROM users
+                        JOIN post ON users.id_users = post.id_users
+                        LEFT JOIN (
+                            SELECT c.comment, u.nama, c.id_post
+                            FROM comments AS c  
+                            JOIN users AS u ON c.id_users = u.id_users
+                            ORDER BY c.created_at DESC
+                        ) AS latest_comment ON post.id_post = latest_comment.id_post
+                        WHERE post.foto = ?";
 
                 $stmt = $connection->prepare($sql);
                 $stmt->bind_param("s", $filename);
